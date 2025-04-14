@@ -1,0 +1,30 @@
+{
+  "name": "meine-electron-app",
+  "version": "1.0.0",
+  "description": "Eine einfache Electron-Anwendung",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "webpack --watch & electron . --dev",
+    "build": "webpack --mode production && electron-builder",
+    "webpack": "webpack"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.10.0",
+    "electron": "^30.0.0",
+    "electron-builder": "^24.9.1",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
