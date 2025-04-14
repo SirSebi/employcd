@@ -50,18 +50,12 @@ export function MainContent() {
           <TabsTrigger value="preview">Vorschau</TabsTrigger>
         </TabsList>
         <TabsContent value="edit">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <CardContent className="pt-6">
-                <IdCardForm data={formData} onChange={handleFormChange} />
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="pt-6 flex items-center justify-center">
-                <IdCardPreview data={formData} />
-              </CardContent>
-            </Card>
-          </div>
+          {/* Nur das Formular anzeigen, keine geteilte Ansicht mehr */}
+          <Card>
+            <CardContent className="pt-6">
+              <IdCardForm data={formData} onChange={handleFormChange} />
+            </CardContent>
+          </Card>
         </TabsContent>
         <TabsContent value="preview">
           <Card>

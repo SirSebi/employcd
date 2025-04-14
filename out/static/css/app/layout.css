@@ -789,9 +789,6 @@ video {
 .mt-auto {
   margin-top: auto;
 }
-.mt-3 {
-  margin-top: 0.75rem;
-}
 .block {
   display: block;
 }
@@ -844,9 +841,6 @@ video {
 .h-3\.5 {
   height: 0.875rem;
 }
-.h-32 {
-  height: 8rem;
-}
 .h-4 {
   height: 1rem;
 }
@@ -865,8 +859,17 @@ video {
 .h-9 {
   height: 2.25rem;
 }
+.h-\[110px\] {
+  height: 110px;
+}
+.h-\[12\%\] {
+  height: 12%;
+}
 .h-\[1px\] {
   height: 1px;
+}
+.h-\[88\%\] {
+  height: 88%;
 }
 .h-\[var\(--radix-navigation-menu-viewport-height\)\] {
   height: var(--radix-navigation-menu-viewport-height);
@@ -888,24 +891,6 @@ video {
 }
 .h-svh {
   height: 100svh;
-}
-.h-\[20\%\] {
-  height: 20%;
-}
-.h-\[70\%\] {
-  height: 70%;
-}
-.h-\[8\%\] {
-  height: 8%;
-}
-.h-\[92\%\] {
-  height: 92%;
-}
-.h-\[6\%\] {
-  height: 6%;
-}
-.h-\[94\%\] {
-  height: 94%;
 }
 .max-h-96 {
   max-height: 24rem;
@@ -949,9 +934,6 @@ video {
 .w-2\.5 {
   width: 0.625rem;
 }
-.w-24 {
-  width: 6rem;
-}
 .w-3 {
   width: 0.75rem;
 }
@@ -985,9 +967,6 @@ video {
 .w-9 {
   width: 2.25rem;
 }
-.w-96 {
-  width: 24rem;
-}
 .w-\[--sidebar-width\] {
   width: var(--sidebar-width);
 }
@@ -996,6 +975,9 @@ video {
 }
 .w-\[1px\] {
   width: 1px;
+}
+.w-\[20\%\] {
+  width: 20%;
 }
 .w-auto {
   width: auto;
@@ -1008,12 +990,6 @@ video {
 }
 .w-px {
   width: 1px;
-}
-.w-1\/3 {
-  width: 33.333333%;
-}
-.w-1\/4 {
-  width: 25%;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1042,26 +1018,20 @@ video {
 .max-w-\[--skeleton-width\] {
   max-width: var(--skeleton-width);
 }
+.max-w-\[500px\] {
+  max-width: 500px;
+}
 .max-w-lg {
   max-width: 32rem;
 }
 .max-w-max {
   max-width: max-content;
 }
-.max-w-3xl {
-  max-width: 48rem;
-}
-.max-w-md {
-  max-width: 28rem;
-}
 .flex-1 {
   flex: 1 1 0%;
 }
 .shrink-0 {
   flex-shrink: 0;
-}
-.flex-grow {
-  flex-grow: 1;
 }
 .grow {
   flex-grow: 1;
@@ -1137,9 +1107,6 @@ video {
 .list-none {
   list-style-type: none;
 }
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1170,6 +1137,9 @@ video {
 .justify-start {
   justify-content: flex-start;
 }
+.justify-end {
+  justify-content: flex-end;
+}
 .justify-center {
   justify-content: center;
 }
@@ -1190,9 +1160,6 @@ video {
 }
 .gap-6 {
   gap: 1.5rem;
-}
-.gap-5 {
-  gap: 1.25rem;
 }
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1241,6 +1208,9 @@ video {
 }
 .break-words {
   overflow-wrap: break-word;
+}
+.rounded {
+  border-radius: 0.25rem;
 }
 .rounded-\[2px\] {
   border-radius: 2px;
@@ -1364,6 +1334,10 @@ video {
 .bg-transparent {
   background-color: transparent;
 }
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
 .fill-current {
   fill: currentColor;
 }
@@ -1391,9 +1365,6 @@ video {
 .p-\[1px\] {
   padding: 1px;
 }
-.p-5 {
-  padding: 1.25rem;
-}
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1417,6 +1388,10 @@ video {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 .px-8 {
   padding-left: 2rem;
@@ -1449,10 +1424,6 @@ video {
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-}
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 .pb-3 {
   padding-bottom: 0.75rem;
@@ -1517,6 +1488,9 @@ video {
 }
 .text-\[0\.8rem\] {
   font-size: 0.8rem;
+}
+.text-\[9px\] {
+  font-size: 9px;
 }
 .text-base {
   font-size: 1rem;
@@ -1729,9 +1703,6 @@ video {
 .duration-200 {
   transition-duration: 200ms;
 }
-.duration-300 {
-  transition-duration: 300ms;
-}
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1778,9 +1749,6 @@ video {
 }
 .duration-200 {
   animation-duration: 200ms;
-}
-.duration-300 {
-  animation-duration: 300ms;
 }
 .ease-in-out {
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2809,10 +2777,6 @@ body {
 
   .md\:max-w-\[420px\] {
     max-width: 420px;
-  }
-
-  .md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:text-sm {
