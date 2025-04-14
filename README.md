@@ -1,64 +1,46 @@
-# Meine Electron React App
+# EmployCD - Desktop-Anwendung
 
-Eine einfache Desktop-Anwendung, die mit Electron und React erstellt wurde.
-
-## Funktionen
-
-- Cross-Plattform: Läuft auf Windows, macOS und Linux
-- Moderne Benutzeroberfläche mit React
-- Einfache Benutzeroberfläche mit einem interaktiven Klick-Zähler
-- Modernes Design mit responsivem Layout
-
-## Voraussetzungen
-
-- [Node.js](https://nodejs.org/) (Version 14 oder höher)
-- npm (wird mit Node.js installiert)
+Diese Anwendung ist eine mit Electron gebaute Desktop-Version einer React/Next.js-Anwendung.
 
 ## Installation
 
-1. Klone dieses Repository oder lade es herunter
-2. Navigiere im Terminal zum Projektverzeichnis
-3. Führe folgenden Befehl aus, um die Abhängigkeiten zu installieren:
+Um die Anwendung zu entwickeln, führen Sie die folgenden Befehle aus:
 
 ```bash
+# Abhängigkeiten installieren
 npm install
+
+# Entwicklungsmodus starten
+npm run electron:dev
 ```
 
-## Entwicklung
+## Verfügbare Skripte
 
-Um die Anwendung im Entwicklungsmodus zu starten:
+- `npm run dev`: Startet die Next.js-Anwendung im Entwicklungsmodus
+- `npm run electron:dev`: Startet die Next.js-Anwendung und die Electron-App im Entwicklungsmodus
+- `npm run electron:build`: Baut die Next.js-Anwendung und verpackt sie als Electron-App
+- `npm run electron:start`: Startet die Electron-App (benötigt vorheriges Build)
 
-```bash
-npm run dev
-```
+## Bauen für verschiedene Plattformen
 
-Dies kompiliert die React-Anwendung, überwacht Änderungen und startet die Electron-App mit geöffneten DevTools.
+Die Anwendung kann für verschiedene Plattformen gebaut werden:
 
-## Produktion
+- **macOS**: `npm run electron:build`
+- **Windows**: `npm run electron:build -- --win`
+- **Linux**: `npm run electron:build -- --linux`
 
-Um die Anwendung ohne DevTools zu starten:
-
-```bash
-npm run webpack && npm start
-```
-
-## Anwendung bauen
-
-Um ausführbare Dateien für Ihr Betriebssystem zu erstellen:
-
-```bash
-npm run build
-```
-
-Die erstellten Dateien befinden sich dann im Verzeichnis `dist`.
+Die gebauten Anwendungen finden Sie im `dist`-Verzeichnis.
 
 ## Projektstruktur
 
-- `main.js` - Hauptprozess der Electron-Anwendung
-- `preload.js` - Vermittelt sichere Kommunikation zwischen Renderer und Hauptprozess
-- `index.html` - Einstiegspunkt für die React-Anwendung
-- `src/renderer/` - React-Komponenten und Styles
-  - `index.js` - Einstiegspunkt für React
-  - `App.jsx` - Hauptkomponente der React-Anwendung
-  - `App.css` - Styling für die Hauptkomponente
-  - `styles.css` - Globales Styling 
+- `main.js`: Electron-Hauptprozess
+- `preload.js`: Preload-Skript für die Electron-App
+- `app/`: Next.js-Anwendungscode
+- `out/`: Exportierter Next.js-Build für Electron
+
+## Technologien
+
+- React
+- Next.js
+- Electron
+- Tailwind CSS 
