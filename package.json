@@ -1,7 +1,7 @@
 {
-  "name": "meine-electron-app",
+  "name": "employcd",
   "version": "1.0.0",
-  "description": "Eine einfache Electron-Anwendung",
+  "description": "Employcd is a desktop application designed for creating professional employee ID cards quickly and efficiently.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -9,7 +9,7 @@
     "build": "webpack --mode production && electron-builder",
     "webpack": "webpack"
   },
-  "author": "",
+  "author": "Sebastian Brandes",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.23.9",
