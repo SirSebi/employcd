@@ -1,6 +1,8 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
+const fs = require('fs');
+const crypto = require('crypto');
 
 // Behalte eine globale Referenz auf das Fenster-Objekt.
 // Wenn du das nicht tust, wird das Fenster automatisch geschlossen,
@@ -9,6 +11,91 @@ let mainWindow;
 
 // Bestimme, ob wir im Entwicklungsmodus sind
 const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
+
+// Generiert einen geheimen Schlüssel für die Verschlüsselung
+// In einer Produktionsumgebung sollte dies sicherer gehandhabt werden
+let encryptionKey;
+try {
+  const keyPath = path.join(app.getPath('userData'), 'secret.key');
+  if (fs.existsSync(keyPath)) {
+    encryptionKey = fs.readFileSync(keyPath, 'utf8');
+  } else {
+    encryptionKey = crypto.randomBytes(32).toString('hex');
+    fs.writeFileSync(keyPath, encryptionKey);
+  }
+} catch (error) {
+  console.error('Fehler beim Generieren des Verschlüsselungsschlüssels:', error);
+  encryptionKey = 'fallback-encryption-key-for-development-only';
+}
+
+// Funktion zum Verschlüsseln von Daten
+function encrypt(text) {
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey, 'hex'), iv);
+  let encrypted = cipher.update(text);
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  return iv.toString('hex') + ':' + encrypted.toString('hex');
+}
+
+// Funktion zum Entschlüsseln von Daten
+function decrypt(text) {
+  const textParts = text.split(':');
+  const iv = Buffer.from(textParts.shift(), 'hex');
+  const encryptedText = Buffer.from(textParts.join(':'), 'hex');
+  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(encryptionKey, 'hex'), iv);
+  let decrypted = decipher.update(encryptedText);
+  decrypted = Buffer.concat([decrypted, decipher.final()]);
+  return decrypted.toString();
+}
+
+// Secure Storage IPC Handler
+ipcMain.handle('secure-store-set', async (event, key, value) => {
+  try {
+    const encryptedValue = encrypt(value);
+    const storagePath = path.join(app.getPath('userData'), 'secure-storage');
+    
+    if (!fs.existsSync(storagePath)) {
+      fs.mkdirSync(storagePath, { recursive: true });
+    }
+    
+    fs.writeFileSync(path.join(storagePath, key), encryptedValue);
+    return true;
+  } catch (error) {
+    console.error('Fehler beim Speichern verschlüsselter Daten:', error);
+    return false;
+  }
+});
+
+ipcMain.handle('secure-store-get', async (event, key) => {
+  try {
+    const storagePath = path.join(app.getPath('userData'), 'secure-storage', key);
+    
+    if (!fs.existsSync(storagePath)) {
+      return null;
+    }
+    
+    const encryptedValue = fs.readFileSync(storagePath, 'utf8');
+    return decrypt(encryptedValue);
+  } catch (error) {
+    console.error('Fehler beim Lesen verschlüsselter Daten:', error);
+    return null;
+  }
+});
+
+ipcMain.handle('secure-store-delete', async (event, key) => {
+  try {
+    const storagePath = path.join(app.getPath('userData'), 'secure-storage', key);
+    
+    if (fs.existsSync(storagePath)) {
+      fs.unlinkSync(storagePath);
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Fehler beim Löschen verschlüsselter Daten:', error);
+    return false;
+  }
+});
 
 function createWindow() {
   // Fenstergröße für Ausweise: 2415 x 1544 Pixel
