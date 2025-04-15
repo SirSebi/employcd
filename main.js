@@ -114,7 +114,7 @@ function createWindow() {
     const vertikalZoom = height / ausweisHoehe;
     zoomFaktor = Math.min(horizontalZoom, vertikalZoom) * 0.9; // 10% Rand
   }
-  
+
   // Erstelle das Browser-Fenster mit der spezifischen Größe für Ausweise
   mainWindow = new BrowserWindow({
     width: Math.min(ausweisBreite, width * 0.9), // Maximal 90% der Bildschirmbreite

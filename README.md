@@ -21,25 +21,29 @@ Die Anwendung verwendet Supabase für die Authentifizierung und Abonnementverwal
 1. Erstellen Sie ein kostenloses Konto auf [Supabase](https://supabase.com)
 2. Erstellen Sie ein neues Projekt
 3. Kopieren Sie Ihre Supabase-URL und Ihren Anon-Key aus den Projekteinstellungen
-4. Erstellen Sie eine `.env.local`-Datei im Stammverzeichnis des Projekts mit folgenden Variablen:
+4. Kopieren Sie `.env.local.example` nach `.env.local` und tragen Sie Ihre Supabase-Daten ein:
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://ihre-project-id.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=ihr-supabase-anon-key
+SUPABASE_SERVICE_KEY=ihr-service-key
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-5. Einrichtung der Abonnement-Datenbank in Supabase:
-   - Erstellen Sie eine neue Tabelle namens `subscriptions` mit folgenden Spalten:
-     - `id` (uuid, Primärschlüssel)
-     - `user_id` (uuid, Fremdschlüssel auf auth.users)
-     - `status` (text, z.B. 'active', 'canceled', 'expired')
-     - `plan_id` (text)
-     - `created_at` (timestamp with time zone, default: now())
-     - `expires_at` (timestamp with time zone)
-     - `metadata` (jsonb, optional für zusätzliche Daten)
+5. Einrichtung der Datenbank mit dem bereitgestellten SQL-Skript:
+   - Navigieren Sie zu Ihrem Supabase-Projekt → SQL-Editor
+   - Laden Sie den Inhalt von `scripts/setup-database.sql` und führen Sie ihn aus
+   - Oder führen Sie die einzelnen SQL-Anweisungen aus der Datei `docs/database.md` aus
 
-6. Aktivieren Sie die E-Mail-Authentifizierung in den Supabase-Authentifizierungseinstellungen
+6. (Optional) Testdaten einfügen:
+   ```bash
+   node scripts/seed-test-data.js
+   ```
+   Dieses Skript erstellt Testbenutzer und Abonnements für die Entwicklung.
+
+## Datenbankdokumentation
+
+Die vollständige Dokumentation der Datenbankstruktur und -funktionen finden Sie in der Datei [docs/database.md](docs/database.md). Dort sind alle Tabellen, Felder, Beziehungen und SQL-Anweisungen dokumentiert.
 
 ## Verfügbare Skripte
 
@@ -67,6 +71,8 @@ Die gebauten Anwendungen finden Sie im `dist`-Verzeichnis.
 - `lib/supabase.ts`: Supabase-Client und Authentifizierungsfunktionen
 - `lib/auth.ts`: Authentifizierungslogik und Token-Management
 - `lib/auth-context.tsx`: React-Kontext für Authentifizierungsstatus
+- `docs/`: Dokumentationen, einschließlich Datenbankstruktur
+- `scripts/`: Hilfsskripte für Entwicklung und Datenbankverwaltung
 
 ## Technologien
 

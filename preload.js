@@ -38,9 +38,4 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.on(channel, (event, ...args) => func(...args));
     }
   }
-});
-
-// Falls benötigt, können hier weitere APIs oder Funktionalitäten hinzugefügt werden
-window.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM vollständig geladen und geparst');
 }); 
