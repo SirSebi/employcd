@@ -1,11 +1,6 @@
-import { Sidebar } from "@/components/sidebar"
-import { MainContent } from "@/components/main-content"
+import { redirect } from "next/navigation"
 
 export default function Home() {
-  return (
-    <div className="flex h-screen bg-background">
-      <Sidebar />
-      <MainContent />
-    </div>
-  )
+  // Leite zur Dashboard-Seite weiter
+  redirect('/dashboard')
 }

@@ -4,10 +4,10 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle, Upload, Check } from "lucide-react"
+import { Upload, Check } from "lucide-react"
 import { toast } from "sonner"
 import { Separator } from "@/components/ui/separator"
+import { PremiumFeatureLock } from "@/components/premium-feature-lock"
 
 interface CompanySettingsProps {
   isPremium: boolean
@@ -75,57 +75,8 @@ export function CompanySettings({ isPremium }: CompanySettingsProps) {
     }
   }
   
-  if (!isPremium) {
-    return (
-      <div className="space-y-6">
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Premium-Funktion</AlertTitle>
-          <AlertDescription>
-            Die Anpassung des Unternehmensauftritts ist nur mit einem Premium-Abonnement (Stufe 2 oder höher) verfügbar.
-            Bitte kontaktieren Sie uns, um Ihr Abonnement zu erweitern.
-          </AlertDescription>
-        </Alert>
-        
-        <div className="opacity-50 pointer-events-none">
-          <form className="space-y-4 max-w-md">
-            <div className="space-y-2">
-              <Label htmlFor="companyName">Unternehmensname</Label>
-              <Input id="companyName" disabled />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="primaryColor">Primäre Unternehmensfarbe</Label>
-              <div className="flex gap-2">
-                <Input type="color" disabled />
-                <Input type="text" disabled />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="secondaryColor">Sekundäre Unternehmensfarbe</Label>
-              <div className="flex gap-2">
-                <Input type="color" disabled />
-                <Input type="text" disabled />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="logo">Unternehmenslogo</Label>
-              <div className="border border-dashed rounded-lg p-6 text-center">
-                <Upload className="mx-auto h-8 w-8 text-muted-foreground" />
-                <p className="mt-2 text-sm text-muted-foreground">Datei hier ablegen oder auswählen</p>
-              </div>
-            </div>
-            
-            <Button disabled>Einstellungen speichern</Button>
-          </form>
-        </div>
-      </div>
-    )
-  }
-  
-  return (
+  // Der eigentliche Inhalt der Einstellungen
+  const settingsContent = (
     <div>
       <h2 className="text-xl font-semibold mb-4">Unternehmenseinstellungen</h2>
       <form onSubmit={handleSubmit} className="space-y-6 max-w-md">
@@ -242,5 +193,17 @@ export function CompanySettings({ isPremium }: CompanySettingsProps) {
         </Button>
       </form>
     </div>
+  )
+  
+  // Die PremiumFeatureLock-Komponente verwendet den Inhalt und zeigt ihn basierend auf dem Abostatus an
+  return (
+    <PremiumFeatureLock 
+      isUnlocked={isPremium} 
+      requiredTier={2}
+      lockTitle="Premium-Funktion" 
+      lockMessage="Die Anpassung des Unternehmensauftritts ist nur mit einem Premium-Abonnement (Stufe 2 oder höher) verfügbar. Bitte kontaktieren Sie uns, um Ihr Abonnement zu erweitern."
+    >
+      {settingsContent}
+    </PremiumFeatureLock>
   )
 } 
