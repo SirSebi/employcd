@@ -24,11 +24,11 @@ const nextConfig = {
   },
   experimental: {
     webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    parallelServerCompiles: true,
   },
   output: 'export',
   distDir: 'out',
+  reactStrictMode: true,
+  swcMinify: true,
 }
 
 if (userConfig) {

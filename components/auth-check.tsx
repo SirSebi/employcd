@@ -27,7 +27,7 @@ export function AuthCheck({ children }: AuthCheckProps) {
     }
   }, [isAuthenticated, isLoading, router, pathname]);
 
-  // Wenn noch geladen wird, zeige nichts an
+  // Wenn noch geladen wird, zeige Ladekreis an
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">

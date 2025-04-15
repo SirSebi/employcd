@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { AuthProvider } from '@/lib/auth-context'
 import { AuthCheck } from '@/components/auth-check'
+import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
   title: 'EmployCD',
@@ -15,12 +16,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="de">
+    <html lang="de" suppressHydrationWarning>
       <body>
         <AuthProvider>
           <AuthCheck>
             {children}
           </AuthCheck>
+          <Toaster />
         </AuthProvider>
       </body>
     </html>
