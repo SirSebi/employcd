@@ -4,6 +4,22 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 // Füge APIs zum Renderer-Prozess hinzu
 contextBridge.exposeInMainWorld('electron', {
+  // Nur für Entwicklungszwecke
+  versions: {
+    node: () => process.versions.node,
+    chrome: () => process.versions.chrome,
+    electron: () => process.versions.electron,
+  },
+  // Für sichere Datenspeicherung, insbesondere für Authentifizierungstokens
+  secureStorage: {
+    set: (key, value) => ipcRenderer.invoke('secure-store-set', key, value),
+    get: (key) => ipcRenderer.invoke('secure-store-get', key),
+    delete: (key) => ipcRenderer.invoke('secure-store-delete', key),
+  },
+  // Für Betriebssystem-spezifische Funktionen
+  os: {
+    platform: () => process.platform,
+  },
   // Hier können sichere Kanäle für die IPC-Kommunikation zwischen Renderer und Main-Prozess erstellt werden
   send: (channel, data) => {
     // Whiteliste von Kanälen, die vom Renderer-Prozess verwendet werden können

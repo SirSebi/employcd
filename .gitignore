@@ -18,8 +18,11 @@
 /build
 
 # Umgebungsvariablen
-.env*.local
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Vercel
 .vercel
@@ -54,10 +57,6 @@ Thumbs.db
 *.tmp
 *.swp
 .eslintcache
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 
 # Andere
 .npm
