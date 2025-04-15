@@ -8,7 +8,7 @@
 
 # Next.js
 /.next/
-/out/
+/out
 
 # Electron
 /dist/
